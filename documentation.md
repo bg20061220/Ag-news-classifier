@@ -32,3 +32,10 @@ ReLu is the activation function.  it decides which neurons fires and which doesn
 and then the self.fc2 does a similar thing where the 128 vector is the input and it passed on to 4 neurons of 128 weights with each neuron per class and they represent how confident they are about the class it belongs to.
 
 This model has 3 layers embeddings -> fc1 ->fc2 
+
+# train.py
+Adam is the algorithm that updates the weights after each batch. nn.Module keeps tracks of all weights on all three layers. learning rate is basically how much of an update it can do in one execution.
+
+CrossEntropyLoss measures how wrong the prediction is. It converts the 4 label scores into proababilities adding to 1 and the most high one with the true label , by log(prob) if wrong and -log(prob) if positive and this happens for all 32 text and the returned value is the average of that and that is what loss.backward works with. 
+
+oh so the loss.backward() computes all the gradients and the optimizer.step() actually uses those gradients to update their weights. 

@@ -13,11 +13,11 @@ def train(num_epochs = 10):
         correct = 0 
         total = 0 
 
-        for texts , labels in train_loader(): 
+        for texts , labels in train_loader: 
             predictions = model(texts) 
             loss = criterion(predictions , labels) 
 
-            optimzer.zero_grad() 
+            optimzer.zero_grad() # this is here to make sure that the gradients are reset before backpropagation
             loss.backward()
             optimzer.step() 
 

@@ -1,4 +1,4 @@
-from data.vocabulary import vocab
+from vocabulary import vocab
 import torch 
 import torch.nn as nn 
 
@@ -7,7 +7,7 @@ class NewsClassifier(nn.Module):
         super().__init__() 
         self.embedding = nn.Embedding(vocab_size , embedding_dim , padding_idx=0)
         self.fc1 = nn.Linear(embedding_dim , hidden_dim) 
-        self.relu = nn.Relu()
+        self.relu = nn.ReLU()
         self.fc2 = nn.Linear(hidden_dim , num_classes) 
 
     def forward(self , x): 
