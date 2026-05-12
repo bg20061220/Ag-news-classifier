@@ -8,7 +8,7 @@ from model import model
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-model.load_state_dict(torch.load("model.pt"))
+model.load_state_dict(torch.load("model.pt", map_location=device))
 model = model.to(device) 
 model.eval() 
 
