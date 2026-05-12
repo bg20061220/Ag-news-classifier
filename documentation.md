@@ -39,3 +39,11 @@ Adam is the algorithm that updates the weights after each batch. nn.Module keeps
 CrossEntropyLoss measures how wrong the prediction is. It converts the 4 label scores into proababilities adding to 1 and the most high one with the true label , by log(prob) if wrong and -log(prob) if positive and this happens for all 32 text and the returned value is the average of that and that is what loss.backward works with. 
 
 oh so the loss.backward() computes all the gradients and the optimizer.step() actually uses those gradients to update their weights. 
+
+# evalaute.py 
+
+ran the model on the test data to see how well it holds , turns out it is slightly overfitted , 90%  accuracy in test mode and 99% in train mode. So it's slightly overfitted. We also made a classification report that basically tells us it's in table of... Sorry, the classification report tells us three, four things. Precision, recall, F1 score, and support. Precision is basically out of all the worlds it guessed how many were correct worlds. And recall is out of how many worlds it gets correct worlds. And that business and tech were the lowest because business and tech news do sound very similar in terms of the vocabulary. We also made a confusion matrix, and that is basically a table of true versus predicted. So how many it predicted true, how many it predicted false. So the major highlight in there was that 84, it predicted world as science and tech. And after that, it predicted world as business and business as world. Those were the top three indications. And yeah, that's the evaluation part.
+
+Now moving on to analysis. 
+
+#analysis.py
