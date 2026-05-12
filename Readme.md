@@ -4,7 +4,7 @@ A text classifier built from scratch in PyTorch trained on the AG News dataset.
 No pretrained models, no shortcuts. Every part of the pipeline is written manually 
 — vocabulary, embeddings, architecture, and training loop.
 
-Built as a learning exercise to understand PyTorch fundamentals before applying to WAT.ai.
+Built as a learning exercise to understand PyTorch fundamentals.
 
 ---
 
