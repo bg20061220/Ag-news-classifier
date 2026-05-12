@@ -9,10 +9,10 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print("Using device:", device)
 
 model = model.to(device)
-optimzer = torch.optim.Adam(model.parameters() , lr = 0.001) 
+optimzer = torch.optim.Adam(model.parameters() , lr = 0.01) 
 criterion = nn.CrossEntropyLoss() 
 
-def train(num_epochs = 10): 
+def train(num_epochs = 5): 
     for epoch in range(num_epochs):
         model.train() 
         total_loss = 0 

@@ -139,3 +139,54 @@ between words rather than averaging them.
 - How cross entropy loss and backpropagation update weights
 - How to read a confusion matrix to find failure patterns rather than just reporting accuracy
 - That 99% training accuracy means nothing without checking the test set
+
+
+## Experiments
+
+### Experiment 1 — Learning Rate
+
+Trained for 5 epochs with three different learning rates to observe the effect on convergence.
+
+| Epoch | lr=0.0001 | lr=0.001 | lr=0.01 |
+|-------|-----------|----------|---------|
+| 1     | 0.578     | 0.827    | 0.892   |
+| 2     | 0.763     | 0.918    | 0.949   |
+| 3     | 0.813     | 0.941    | 0.967   |
+| 4     | 0.843     | 0.955    | 0.978   |
+| 5     | 0.862     | 0.966    | 0.984   |
+
+**Insights**
+
+- `lr=0.0001` is too conservative — the model is still climbing at epoch 5 and would need significantly more epochs to converge. The weight updates are so small that the model barely moves each batch.
+- `lr=0.001` is solid — steady improvement every epoch, well behaved loss curve.
+- `lr=0.01` converges fastest — best accuracy at every epoch. For this problem and architecture, larger update steps actually help rather than causing instability.
+
+The takeaway is that learning rate has a bigger impact on training speed than on final accuracy. Given enough epochs all three would likely converge.
+
+### Experiment 2 — Extra Linear Layer
+
+Added a third linear layer to see if more depth would improve accuracy.
+
+Original architecture: Embedding → Mean Pool → fc1 (64→128) → ReLU → fc2 (128→4)
+New architecture: Embedding → Mean Pool → fc1 (64→128) → ReLU → fc2 (128→128) → ReLU → fc3 (128→4)
+
+| Epoch | 2 layers | 3 layers |
+|-------|----------|----------|
+| 1     | 0.827    | 0.816    |
+| 5     | 0.966    | 0.966    |
+| 10    | 0.992    | 0.992    |
+
+Test accuracy: **90% on both models**
+
+**Insights**
+
+Adding a third linear layer made no meaningful difference — same training accuracy, 
+same test accuracy, same convergence speed. 
+
+The bottleneck in this model is not the depth of the network. It is mean pooling. 
+No matter how many linear layers you stack on top, the input to those layers is 
+still a single averaged vector that has already lost word order and context. 
+Adding more layers cannot recover information that was thrown away during pooling.
+
+To meaningfully improve this classifier the right move is to replace mean pooling 
+with a better aggregation method — not to add more linear layers.
